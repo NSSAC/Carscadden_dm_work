@@ -1,0 +1,85 @@
+\documentclass[11pt]{article}
+
+\setlength{\textheight}{9.0 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\oddsidemargin}{0 in}
+\setlength{\evensidemargin}{0 in}
+\setlength{\topmargin}{-0.5 in}
+\setlength{\parskip}{4pt}
+
+%% \usepackage[nofillcomment,ruled,linesnumbered]{algorithm2e}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{cite}
+
+%\usepackage{biblatex}
+
+%\addbibresource{references.bib}   %%% No need for this.
+
+%% \pagestyle{empty}
+\begin{document}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{fact}{Fact}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{observation}{Observation}[section]
+\newtheorem{claim}{Claim}[section]
+
+\newcommand{\cnp}{\textbf{NP}}
+\newcommand{\true}{\texttt{True}}
+\newcommand{\false}{\texttt{False}}
+
+\newcommand{\QED}{\hfill\rule{2mm}{2mm}}
+
+\newcommand{\irange}{\mbox{$1 \leq i \leq n$}}
+\newcommand{\jrange}{\mbox{$1 \leq j \leq m$}}
+
+\newcommand{\dunder}[1]{\underline{\underline{#1}}}
+
+\setlength{\parskip}{3pt}
+
+\baselineskip=1.2\normalbaselineskip
+
+\begin{center}
+{\Large\textbf{Proposal for the Distinguished Majors Program}} \\ \medskip
+\end{center}
+
+\medskip
+%\begin{center}
+\noindent
+{\large
+    \begin{tabular}{ll}
+      \textbf{Student Name:} &  Henry L. Carscadden \\ [2ex] 
+      \textbf{Contact Information:} &  \texttt{hlc5v@virginia.edu}, 804-616-6008 \\ [2ex]
+      \textbf{Proposal Title:} & Propagation of Multiple Contagions
+                   in Networks
+   \end{tabular}
+ }  
+%\end{center}
+
+\medskip
+
+\section{Introduction}\label{sec:intro}
+
+ In recent years, the use of agent-based models (ABMs) has been explored as an alternative to differential equations for studying bio-social systems. ABMs have the ability to better capture the highly non-linear and  heterogeneous nature of such systems that differential equations abstract away. Understanding the spread of a contagion across a network is a problem well-suited to ABMs. Given information about agents' interactions and their infected status, contagion spread may be studied using a general modeling framework called a \textbf{synchronous dynamical system} (SyDS). A SyDS is specified by a graph $G(V, E)$, where $|V| = n$, and a set $\mathcal{F}=\{f_1, f_2, \ldots, f_n\}$ which gives the update rule (or local transition function) for each node in $V$. Each node of $G$ represents an agent and the edges of $G$ represent the permissible interactions among the agents. In a SyDS, the state of a node $v$ at time $t+1$ depends only upon the state of its neighbors at time $t$ and the function $f_v$ \cite{Adiga-etal-2019}. Formulating the problem of contagion spread in this manner allows questions about the possible states of the system to be posed and studied. However, most work in this area focuses on the case of a single contagion although there are many applications in which modelling the spread of multiple, potentially competing or cooperating, contagions is useful. The spread of different ideologies, brands, or strains of a disease require a multiple contagion framework. For my distinguished major project, I intend to explore this area by developing SyDS models for this problem and studying some optimization problems under these models.
+ 
+ 
+ \section{Related Work}\label{sec:related}
+  
+ The single contagion SyDS has been well-studied using several models, including the well known susceptible-infected-recovered (SIR) model. Under this model, each member of the population is a node in one of susceptible, infected, or recovered states. Susceptible nodes may transition to infected, and infected nodes may transition to recovered. Once recovered, nodes do not change state. This model has been applied to understand the spread of epidemics and social contagions. Recent work in this area has focused on developing algorithms for forecasting or determining the source of an infection \cite{Adiga-etal-2019}. These problems are often computationally intractable; hence efficient heuristics are used in practice. In the area of multiple contagions, work has been done with ABMs on the dynamics of propagation of emotions through online social networks and the choice of optimal starting nodes for the spread of competing contagions \cite{Kumar-etal-2019, emotion-contagion}. Work has also been done in this area to understand how the impact of multiple layers, that is, multiple types of contacts between nodes, impacts the spread of multiple contagions \cite{emotion-contagion}. However, studies in this area generally assume a model with homogeneous state transition rules, and many follow a susceptible-infected-susceptible (SIS) model \cite{Kumar-etal-2019, emotion-contagion, jovanovski-multilayer, stanoev-multicontagion}.
+
+ \section{Areas of Exploration}\label{sec:areas}
+ 
+ To study the problem of multiple contagions, my work will focus on the development of SyDS models and the exploration of their properties. In particular, these models will use several classes of update rules. This approach will allow for heterogeneity in update rules not captured by other models. Additionally, the resulting models can be used to study both cooperating and competing contagions. Data for simulations using these models will be obtained from several sources such as the Stanford Network Analysis Project (SNAP) and online social media. Some synthetic data will also be generated for comparing model performance.  Potential heuristics or algorithms for different optimization problems, such as maximizing or minimizing contagion spread, will be examined. Furthermore, we plan to integrate the software produced in this research into the CINES (Cyber-Infrastructure for Network Engineering and Science) tool being developed at UVA's Biocomplexity Institute and Initiative. 
+
+\bibliographystyle{plain}
+\bibliography{references.bib}
+%\printbibliography
+\end{document}
+

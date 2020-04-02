@@ -1,0 +1,100 @@
+\documentclass[11pt]{article}
+
+\setlength{\textheight}{9.0 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\oddsidemargin}{0 in}
+\setlength{\evensidemargin}{0 in}
+\setlength{\topmargin}{-0.5 in}
+
+\setlength{\parskip}{4pt}
+
+%% \usepackage[nofillcomment,ruled,linesnumbered]{algorithm2e}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{url}
+
+%% \pagestyle{empty}
+\begin{document}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{fact}{Fact}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{observation}{Observation}[section]
+\newtheorem{claim}{Claim}[section]
+
+\newcommand{\cnp}{\textbf{NP}}
+\newcommand{\true}{\texttt{True}}
+\newcommand{\false}{\texttt{False}}
+
+\newcommand{\QED}{\hfill\rule{2mm}{2mm}}
+
+\newcommand{\irange}{\mbox{$1 \leq i \leq n$}}
+\newcommand{\jrange}{\mbox{$1 \leq j \leq m$}}
+
+\newcommand{\dunder}[1]{\underline{\underline{#1}}}
+
+\setlength{\parskip}{3pt}
+
+\baselineskip=1.1\normalbaselineskip
+
+\begin{center}
+\dunder{\Large{\textbf{Literature Review}}}
+\end{center}
+
+\medskip
+
+\noindent
+\textbf{Paper:}  P. Kumar, P. Verma, A. Singh and H. Cherifi,
+``Choosing Optimal Seed Nodes in Competitive Contagion”, Frontiers
+in Big Data, Vol. 2, Article 6, June 2019, pp. 1--6.
+
+\medskip
+
+\noindent
+\textbf{Summary:}
+
+\begin{itemize}
+\item Focused on influence maximization
+  \begin{itemize}
+     \item two competing infections
+     \item seed nodes chosen according to centrality measure; 
+           higher centrality nodes have a high costs; 
+           cost of the nodes is determined by best centrality measure
+    \item less quantity, more influential nodes v. more quantity, less influential
+        \begin{itemize}
+	   \item used best centrality measure for given dataset
+	   \item high-less is best across the board for all datasets
+        \end{itemize}
+	\item studies appear from a game theoretic setting; use of Nash equilibrium
+	\item undirected network
+	\item measures: degree centrality, closeness centrality
+	(1/sum of distance from other nodes), betweenness centrality
+	(percentage of shortest paths v appears in), the maximum
+	eigenvalue of a node’s eigenvalue in the adjacency matrix,
+	pagerank
+	\item choices made in first experiment by order of decreasing centrality
+	\item no one centrality measure is best
+	\item equal competitive constants
+	\item no conclusive evidence on using one centrality measure
+            \begin{itemize}
+		\item search algorithm for picking nodes not in
+		order of descending centrality but based off expected
+		benefit
+            \end{itemize}
+	\item cascade algorithm attempts to spread to all adjacent
+	nodes; every time it is infected the competitive constant
+	for the infecting strain grows on that node
+   \end{itemize}
+\end{itemize}
+
+\smallskip
+
+\noindent
+\rule{\textwidth}{0.01in}
+
+\end{document}
