@@ -1,0 +1,43 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{SyDS Notes}
+\author{hlc5v }
+\date{April 2020}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+    \item Specified by $\mathcal{G, F, U}$
+    \begin{enumerate}
+        \item $\mathcal{F}$ uses inputs only from time $t$ to determine update at $t+1$
+        \item $\mathcal{F}$ gives local transition functions
+        \item a transition function $f$ is $r$ symmetric if it follows the threshold model i.e. $r=1,f(\Sigma a_{i}), r=2 f(\Sigma a_{i}, \Sigma a_{j}), ... etc.$ where if each of the sums is above a threshold $f$ is 1 and 0 otherwise.
+    \end{enumerate}
+    \item A Garden of Eden configuration has no predecessor
+    \item A fixed-point is configuration that updates to itself
+    
+    \item Three analysis problems covered in depth:
+    \begin{enumerate}
+        \item Fixed-Point Existence
+        \begin{enumerate}
+            \item Checking is trivial
+            \item NP-Complete in general but efficiently solvable in a lot of cases
+        \end{enumerate}
+        \item Reachability
+        \begin{enumerate}
+            \item Symmetric functions make this easier
+            \item Intractable for heterogeneous symmetric functions
+            \item Efficient for bi-threshold, acyclic, directed graphs
+        \end{enumerate}
+        \item Predecessor Existence
+        \begin{enumerate}
+            \item Existence + counting version are solvable for r-symmetric and treewidth bounded graphs
+            \item In general, however, is NP-Complete
+        \end{enumerate}
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}
