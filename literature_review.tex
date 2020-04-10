@@ -94,8 +94,110 @@ in Big Data, Vol. 2, Article 6, June 2019, pp. 1--6.
 \end{itemize}
 
 \smallskip
+\rule{\textwidth}{0.01in}
+\textbf{Paper:} S. Bharathi, D. Kempe, and M. Salek, "Competitive Influence Maximization in Social Networks" Dept. of CS, UCS
 
+\begin{enumerate}
+
+    \item Agent $i$ wants to maximize $E[|T_{i}|]$
+    \item Strategy for the last player to commit
+    \begin{enumerate}
+    
+        \item Greedy choice of adding node with highest 
+        marginal return is within $1-\frac{1}{e}$ of optimal
+        
+        \item Uses fact that the nodes chosen according to this strategy add at least as many paths as those according to another strategy
+        
+    \end{enumerate}
+    
+    \item The Nash Equilibrium expected set of activated nodes is at least half that of if one person played
+    
+    \item First mover strategy in duopoly
+    \begin{enumerate}
+        \item Strongly polynomial dynamic program to maximize r's pieces
+    \end{enumerate}
+    
+    \item FPTAS available for tree version of problem
+    
+    \item No greedy algorithm for more than duopoly and not last player
+    
+    \item Terms: 
+    \begin{enumerate}
+    
+    \item Submodular- as the number of neighbors activates increases, their marginal impact decreases
+    \\ i.e. for $S,T \subset V$, $f(S) + f(T) \geq f(S \cap T) + f(S \cup T)$
+    
+    \item Monotonicity- as the number of activated neighbors grows, the likelihood of activation increases
+    \\ i.e. $f(S) \leq f(T) \leq f(V)$ \\ for $S \subset T \subset V$
+    
+    \end{enumerate}
+    
+\end{enumerate}
+\smallskip
 \noindent
 \rule{\textwidth}{0.01in}
+\textbf{Note from GDS Paper}
+\begin{enumerate}
+    \item Specified by $\mathcal{G, F, U}$
+    \begin{enumerate}
+        \item $\mathcal{F}$ uses inputs only from time $t$ to determine update at $t+1$
+        \item $\mathcal{F}$ gives local transition functions
+        \item a transition function $f$ is $r$ symmetric if it follows the threshold model i.e. $r=1,f(\Sigma a_{i}), r=2 f(\Sigma a_{i}, \Sigma a_{j}), ... etc.$ where if each of the sums is above a threshold $f$ is 1 and 0 otherwise.
+    \end{enumerate}
+    \item A Garden of Eden configuration has no predecessor
+    \item A fixed-point is configuration that updates to itself
+    
+    \item Three analysis problems covered in depth:
+    \begin{enumerate}
+        \item Fixed-Point Existence
+        \begin{enumerate}
+            \item Checking is trivial
+            \item NP-Complete in general but efficiently solvable in a lot of cases
+        \end{enumerate}
+        \item Reachability
+        \begin{enumerate}
+            \item Symmetric functions make this easier
+            \item Intractable for heterogeneous symmetric functions
+            \item Efficient for bi-threshold, acyclic, directed graphs
+        \end{enumerate}
+        \item Predecessor Existence
+        \begin{enumerate}
+            \item Existence + counting version are solvable for r-symmetric and treewidth bounded graphs
+            \item In general, however, is NP-Complete
+        \end{enumerate}
+    \end{enumerate}
+\end{enumerate}
+
+\smallskip
+\noindent
+\rule{\textwidth}{0.01in}
+\textbf{Paper:} M. Newman and C. Ferrario, "Interacting Contagion and Coinfection on Contact Networks." Plos One
+\begin{enumerate}
+    \item Model Assumptions:
+    \begin{enumerate}
+        \item Sequential Infections-Disease A first propogates through the network. Disease B then propogates after it.
+        \item A node must first have been infected by disease A if it is to be infected by disease B
+        \item Follows the SIR model
+        \item Infected individuals become recovered at a fixed-time $\tau$ and infect neighbors with fixed probability $\beta$
+        \item This model assumes the same mode of transmission (This is required for the network to be the same for both diseases)
+        \item The graph follows a random distribution based on a Poisson random variable and the averege degree
+    \end{enumerate}
+    \item The "cavity method" can be used to find the expected number of nodes infected by disease A
+    \item For disease B, analysis is complicated by the fact that we must condition on infection with disease B; however, it can still be found with the "cavity method"
+    \item These analyses also yield the probability that each disease becomes an epidemic
+    \item The epidemic thresholds (The values at which the parameters of the model dictate the disease will transition from non-epidemic to epidemic) are also determined analytically
+    \begin{enumerate}
+        
+        \item The epidemic threshold of the disease B decreases as the transmissibility of the disease A increases
+        
+        \item When the transmissibility of disease A is one (everything is infected disease A), then, disease B has the same epidemic threshold as disease B
+        
+    \end{enumerate}
+    \item Two ways to stop the spread of disease B: limit transmissibility of A or B
+    \item Perhaps, the transmission of the severe cases of Covid-19 could modelled under this framework of subsequent infection with disease A being one of the comorbidities with a high odds-ratio ( hypertension, respiratory system disease, cardiovascular
+    disease)
+    \item Based on the need for numerical iteration to solve for thresholds in the simple case of the Poisson Distribution, there may be potential for work on approximating these values in more complex situations. 
+    
+\end{enumerate}
 
 \end{document}
