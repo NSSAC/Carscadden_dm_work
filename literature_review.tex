@@ -98,7 +98,18 @@ in Big Data, Vol. 2, Article 6, June 2019, pp. 1--6.
 \textbf{Paper:} S. Bharathi, D. Kempe, and M. Salek, "Competitive Influence Maximization in Social Networks" Dept. of CS, UCS
 
 \begin{enumerate}
-
+    \item Model:
+    \begin{enumerate}
+        \item Diffusion model
+        
+        \item Each edge has an activation probability
+        
+        \item The first activated incoming edge of a node determines the which infection it has
+        
+        \item The time at which the edge activation is determined by continuous independent, exponential r.v.'s
+        
+        \item Weakness: Once a node is activated, it has no chance of changing sets.$\implies$ Every graph reaches a fixed point
+    \end{enumerate}
     \item Agent $i$ wants to maximize $E[|T_{i}|]$
     \item Strategy for the last player to commit
     \begin{enumerate}
@@ -180,7 +191,7 @@ in Big Data, Vol. 2, Article 6, June 2019, pp. 1--6.
         \item Follows the SIR model
         \item Infected individuals become recovered at a fixed-time $\tau$ and infect neighbors with fixed probability $\beta$
         \item This model assumes the same mode of transmission (This is required for the network to be the same for both diseases)
-        \item The graph follows a random distribution based on a Poisson random variable and the averege degree
+        \item The graph follows a random distribution based on a Poisson random variable and the average degree
     \end{enumerate}
     \item The "cavity method" can be used to find the expected number of nodes infected by disease A
     \item For disease B, analysis is complicated by the fact that we must condition on infection with disease B; however, it can still be found with the "cavity method"
@@ -199,5 +210,43 @@ in Big Data, Vol. 2, Article 6, June 2019, pp. 1--6.
     \item Based on the need for numerical iteration to solve for thresholds in the simple case of the Poisson Distribution, there may be potential for work on approximating these values in more complex situations. 
     
 \end{enumerate}
+\smallskip
+\noindent
+\rule{\textwidth}{0.01in}
+\textbf{Paper:} S. Myers and J. Leskovec, "Clash of the Contagions: Cooperation and Competition in Information Diffusion", ICDM
+\begin{enumerate}
+    \item Model 
+    \begin{enumerate}
+        \item Users sees a piece of content
+        \item User decides whether or not to interact with a piece of content
+        \item The sequence length and number of clusters is fixed
+        \item The sequence of exposures is independent
+        \item Contagions are not mutually exclusive
+        \item Goal: Find the probability that a user interacts X with a piece of content given a sequence of K exposures
+         \item How: Minimize the log-likelihood
+        \item Three Mechanisms in This Decision: 
+        \begin{enumerate}
+            \item Virality- The inherent interestingness of the content
+            \item User Bias- The user's preference for this type of content
+            \item Content Interaction Term- How does what the user has seen impact the probability. This is treated as an additive term.
+        \end{enumerate}
+        \item Contagions are clustered for the purpose of the Content Interaction Term. This reduces the number of possible sequences.
+        \item Interaction matrix fit with Stochastic Gradient Descent
+        \item Idea: Multiply the virality term by an emotional valence term 
+        \item Idea: Add a term that subtracts or adds to the probability based on the strength of an edge. This could be used to show how strong, dense sub-networks might be more likely to share a piece information originating within themselves although it has low virality.
+    \end{enumerate}
+    \item Dataset:
+    \begin{enumerate}
+        \item Data is sourced from Twitter
+        \item The focus is on tweets the contain URLs
+        \item Each URL is a contagion
+        \item Following represents exposure to a contagion
+        \item Re-tweeting represents infection with a contagion
+    \end{enumerate}
+    \item Highly infectious URLs increase the infectivity of URLs in their clusters and decrease the infectivity of those in other clusters
+    
+\end{enumerate}
+
+
 
 \end{document}
