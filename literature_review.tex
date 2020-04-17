@@ -211,6 +211,7 @@ in Big Data, Vol. 2, Article 6, June 2019, pp. 1--6.
     
 \end{enumerate}
 \smallskip
+\section{Influence Maximization}
 \noindent
 \rule{\textwidth}{0.01in}
 \textbf{Paper:} S. Myers and J. Leskovec, "Clash of the Contagions: Cooperation and Competition in Information Diffusion", ICDM
@@ -247,6 +248,43 @@ in Big Data, Vol. 2, Article 6, June 2019, pp. 1--6.
     
 \end{enumerate}
 
+\section{}
+
+\textbf{Paper: } Beutel et al., "Interacting Viruses in Networks Can Both Survive?" pg. 426-434
+\begin{enumerate}
+    
+    \item In a situation where two viruses compete but may co-exist, when can both survive as epidemics?
+    
+    \item Dataset: Google query counts of two partially competing products over time.
+    
+    \item Model \begin{enumerate}
+        \item Assumes as $SI_{1}I_{2}S$ model
+        
+        \item Nodes return to S with rates $\delta_{1},\delta_{2}$ for infections of disease 1 and 2.
+        
+        \item Infections with diseases 1 and 2 spread at rates $\beta_{1}\beta_{2}$ respectively
+        
+        \item $\epsilon \in [0,1]$ damps the rate of infection if a node is already infected with the another disease. For example, if already infected with disease 1, a node is infected by disease 2 at rate $\epsilon\beta_{2}$.
+        
+        \item All nodes share these same parameters
+        
+        \item The underlying graph is a clique; this assumes 
+        that there is homogeneous mixing. 
+         
+        
+    \end{enumerate}
+    
+    \item The co-existences threshold is determined by functions of the ratios of infectivity to recovery rate for two diseases.
+    
+    
+    \item The threshold for a fixed-point that co-exists can be 
+    found analytically using differential equations describing the rate of infection within the clique.
+    
+    \item Primary contribution \begin{enumerate}
+        \item There is a phase transition from co-existence to winner-takes-all
+    \end{enumerate}
+    
+\end{enumerate}
 
 
 \end{document}
