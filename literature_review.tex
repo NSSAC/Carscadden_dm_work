@@ -247,8 +247,9 @@ in Big Data, Vol. 2, Article 6, June 2019, pp. 1--6.
     \item Highly infectious URLs increase the infectivity of URLs in their clusters and decrease the infectivity of those in other clusters
     
 \end{enumerate}
-
-\section{}
+\noindent
+\rule{\textwidth}{0.01in}
+\section{Co-existence Thresholds}
 
 \textbf{Paper: } Beutel et al., "Interacting Viruses in Networks Can Both Survive?" pg. 426-434
 \begin{enumerate}
@@ -285,6 +286,44 @@ in Big Data, Vol. 2, Article 6, June 2019, pp. 1--6.
     \end{enumerate}
     
 \end{enumerate}
-
+\noindent
+\rule{\textwidth}{0.01in}
+\textbf{Paper: } Karrer, Newman, "Competing epidemics on complex networks." arXiv:1105.3424v1
+\begin{enumerate}
+    
+    \item Model: \begin{enumerate}
+        \item Cross-immunity is assumed for the diseases.
+        
+        \item Two diseases spread concurrently.
+        
+        \item Reed-Frost SIR model is adopted.
+        
+        \item The model uses discrete time steps and 
+        a uniform transmission probability for each disease.
+        
+        \item The network is directed. Infected seed nodes
+        are chosen randomly from the network.
+        
+        \item The two diseases spread in a fixed but different
+        number of time-steps.
+    \end{enumerate}
+    
+    \item Analysis in the limit of Large Networks
+    \begin{enumerate}
+        
+        \item For large networks, analysis can produce a phase diagram
+        
+        \item Let $\Beta$ be the ratio of the fast transmission rate for the fast-spread disease to the slow-spreading disease
+        
+        \item For $\Beta \neq 1$, the analysis of the network boils down to the residual network analysis of two diseases spreading subsequently. This is because the proportion of the network that may be infected by the less fit disease is always a fraction of the fit disease's infection.
+        
+        \item The spread of the slower disease can only occur if the fast disease has a sufficiently low transmission rate.
+        
+        \item If one disease starts with more carriers, 
+        they may easily dominate the network
+    \end{enumerate}
+    \item  
+    
+\end{enumerate}
 
 \end{document}
