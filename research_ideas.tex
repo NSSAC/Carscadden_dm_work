@@ -42,6 +42,10 @@
 
 \baselineskip=1.1\normalbaselineskip
 
+\newcommand{\cone}{\mbox{$\mathcal{C}_1$}}
+\newcommand{\ctwo}{\mbox{$\mathcal{C}_2$}}
+
+
 \newcommand{\sstate}{\mbox{$\mathbb{S}$}}
 \newcommand{\istate}{\mbox{$\mathbb{I}$}}
 \newcommand{\rstate}{\mbox{$\mathbb{R}$}}
@@ -52,23 +56,30 @@
 
 \medskip
 
-\section{Influence of graph structures on co-existence of contagions} 
+\section{Influence of Graph Structure on the Co-existence of Contagions} 
 
 \subsection{Model}
 
 We will use the SIR epidemic model with some modifications.
-There will be two contagions denoted by $I_{1}$ and $I_{2}$. The underlying
-graph, $G(V,E)$, is a directed graph. Each node in $V$
-can be in one of five possible states, 
-denoted by Susceptible (\sstate), $I_{1}, I_{2}, I_{1}I_{2}$,
-and Recovered (\rstate). 
-Each edge will have two probability values, denoted by $p_1$
-and $p_2$, corresponding to the probability of transmitting
-$I_{1}$ and $I_{2}$ respectively.  
-The transition time from
-susceptible to recovered/removed will be specified by a random
-variable shared by the contagions. 
-(Note: This variable must have integer values.) 
+We consider two contagions denoted by \cone{} and \ctwo. The underlying
+graph $G(V,E)$ is directed. Each node in $V$
+can be in one of the following five possible states: 
+\begin{description}
+\item{(i)} \sstate{} (Susceptible), 
+\item{(ii)} $\istate_{1}$ (Infected by \cone{} only),
+\item{(iii)} $\istate_{2}$ (Infected by \ctwo{} only), 
+\item{(iv)} $\istate_{1,2}$ (infected by both \cone{} and \ctwo) and 
+\item{(v)} Recovered (\rstate). 
+\end{description}
+Each directed edge $(u,v)$  will have two probability values, denoted by $p_1$
+and $p_2$; here, $p_1$ ($p_2$) denotes the probability of transmitting contagion
+\cone{} (\ctwo) from $u$ to $v$.
+For each contagion, the transition time from state
+\istate{} to state \rstate{} will be specified by a random
+variable. 
+(Note: We may need to use two different random variables
+for the two contagions. These variables must have integer values 
+because of the SyDS model.) 
 
 \subsection{Experimental Idea 1}
 
