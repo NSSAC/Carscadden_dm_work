@@ -42,32 +42,57 @@
 
 \baselineskip=1.1\normalbaselineskip
 
+\newcommand{\sstate}{\mbox{$\mathbb{S}$}}
+\newcommand{\istate}{\mbox{$\mathbb{I}$}}
+\newcommand{\rstate}{\mbox{$\mathbb{R}$}}
+
 \begin{center}
-\dunder{\Large{\textbf{Experiment Ideas}}}
+\dunder{\Large{\textbf{Ideas for Experiments}}}
 \end{center}
 
 \medskip
-\section{Influence of graph structures on co-existence} 
+
+\section{Influence of graph structures on co-existence of contagions} 
+
 \subsection{Model}
-    We will be using the SIR SyDS model with some modifications. There will be two
-    contagions $I_{1}$ and $I_{2}$. The underlying graph, $G(V,E)$, will be a directed graph
-    containing nodes $V$ with five possible states susceptible, $I_{1}, I{2}, I_{1}I_{2}$, and recovered. Each edge will contain 
-    two probabilities $p_{I_{1}}$ and $p_{I_{2}}$ that correspond to the probability of transmitting $I_{1}$ and $I_{2}$ respectively. 
-    The transition time from susceptible to recovered/removed will be specified by a random variable shared by the contagions and, likewise, for recovered/removed to susceptible. 
-\subsection{Experiment Idea 1}
-    Choose two seed nodes that have a similar out-degree and run a simulation to see if the infections for both nodes
-    converge to a fixed points. Each contagion will have it's edge probabilities selected from a random variable that holds constant
-    across simulations. Run simulations where the graph is tweaked  to exhibit more or less of a given type of structure. Use the outcomes of these trails to determine a threshold at which both infections co-exist in the limit. \\
-    Properties to Test:
-    \begin{enumerate}
-        \item Degree distribution
-        \item Assortativity:
-        \begin{enumerate}
+
+We will use the SIR epidemic model with some modifications.
+There will be two contagions denoted by $I_{1}$ and $I_{2}$. The underlying
+graph, $G(V,E)$, is a directed graph. Each node in $V$
+can be in one of five possible states, 
+denoted by Susceptible (\sstate), $I_{1}, I_{2}, I_{1}I_{2}$,
+and Recovered (\rstate). 
+Each edge will have two probability values, denoted by $p_1$
+and $p_2$, corresponding to the probability of transmitting
+$I_{1}$ and $I_{2}$ respectively.  
+The transition time from
+susceptible to recovered/removed will be specified by a random
+variable shared by the contagions. 
+(Note: This variable must have integer values.) 
+
+\subsection{Experimental Idea 1}
+
+Choose two seed nodes that have a similar out-degree and run a
+simulation to see if the infections for both nodes converge to 
+fixed points. Each contagion will have it's edge probabilities
+selected from a random variable that holds constant across simulations.
+Run simulations where the graph is tweaked  to exhibit more or less
+of a given type of structure. Use the outcomes of these trails to
+determine a threshold at which both infections co-exist in the
+limit.
+
+\medskip
+
+\noindent
+\textbf{Properties to Test:}
+
+ \begin{enumerate}
+    \item Degree distribution
+    \item Assortativity:
+       \begin{enumerate}
             \item $k_{nn}$ distribution
-            \item assortativity coefficient
+            \item Assortativity coefficient
         \end{enumerate}
     \end{enumerate}
-    
-
 
 \end{document}
