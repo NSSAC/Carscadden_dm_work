@@ -273,6 +273,41 @@ Coinfection on Contact Networks", \emph{PLOS One}, Vol. 8, No. 8, Aug. 2013,
     \item Based on the need for numerical iteration to solve for thresholds in the simple case of the Poisson Distribution, there may be potential for work on approximating these values in more complex situations. 
     
 \end{enumerate}
+\smallskip
+\rule{\textwidth}{0.01in}
+
+\textbf{Paper: } Stanoev et al., Modeling the spread of multiple contagions on networks.
+
+\begin{enumerate}
+    \item Model
+    \item \begin{enumerate}
+        \item General framework for an arbitrary number of contagions.
+        \item Assumes all edges share the infection probability for each disease. I.E., there are global rates $\Beta_{1},\Beta_{2},...$
+        \item Provides a numerical approximation for the update rule that closely fits the true update
+        \item Handles multiple successful infections by choosing one successful infection uniformly randomly.
+    \end{enumerate}
+\end{enumerate}
+
+\smallskip
+\rule{\textwidth}{0.01in}
+
+\textbf{Paper:} Caccioli et al., "Overlapping portfolios, contagion, and financial stability" 
+
+
+\begin{enumerate}
+    \item All nodes are a bank from a dataset of Austrian banks
+    \item Edges represent the interbank loans
+    \item Each bank has attributes for liquid and illiquid assets
+    \item There is a single contagion of bankruptcy spread through multiple channels
+    \begin{enumerate}
+    \item The contagion of counterparty risk is spread by the risk on banks defaulting on their obligations to their lenders.
+    \item The contagion of overlapping portfolios is represented by each node holding a common asset.
+    \item Fire-sales of assets occur when a bank collapses and sells the common asset decreasing its price.
+    \end{enumerate}
+    \item The phenomena of fire-sales and common assets amplify the risk of the contagion spreading that is presented by interbank loans
+    \item The primary finding of this paper is that none of the source of risks by itself is enough to create sufficient systemic risk without being of incredible proportions.
+\end{enumerate}
+\smallskip
 
 \noindent
 \rule{\textwidth}{0.01in}
@@ -411,5 +446,8 @@ Arxiv Report arXiv:1105.3424v1, 2011, 14 pages.
     \item  
     
 \end{enumerate}
+
+
+
 
 \end{document}
