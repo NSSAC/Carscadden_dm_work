@@ -79,6 +79,8 @@ Competition in Information Diffusion", \emph{Proc. IEEE Intl. Conf. Data Mining}
 
 \item B. Karrer and M. E. J. Newman, ``Competing Epidemics on Complex Networks",
 Arxiv Report arXiv:1105.3424v1, 2011, 14 pages.
+
+\item Chen et al., "Robust Influence Maximization", \emph{KDD '16: Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining}, 2016, pgs. 795-804.
 \end{enumerate}
 
 \clearpage
@@ -315,8 +317,26 @@ Coinfection on Contact Networks", \emph{PLOS One}, Vol. 8, No. 8, Aug. 2013,
 \clearpage
 
 \section{Influence Maximization}
+\noindent
+
+\textbf{Paper:}~
+Chen et al., "Robust Influence Maximization", \emph{KDD '16: Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining}, 2016, pgs. 795-804.
+\begin{enumerate}
+    \item Model: \begin{enumerate}
+        \item The paper follows the single-contagion independent cascade model.
+        \item Each infected node attempts to spread its contagion to susceptible neighbors each time step. Each edge infects with mutually independent probabilities.
+    \end{enumerate}
+    \item The greedy 1-$\frac{1}{e}$ heuristic of KKT (Kempe, Kleinberg, Tardos) is introduced for the independent cascade influence maximization problem. 
+    \item The robust influence maximization problem is introduced in which edges have a confidence interval instead of a point estimate for the activation probability.
+    \item \begin{enumerate}
+        \item To deal with the robust problem, the KKT heuristic is used with the lower-bound of the confidence interval. This estimate is $\alpha(\theta)(1-\frac{1}{e}$ where $\alpha(\theta)$ = (spread from the KKT solution using the lower-bound)/(spread from the KKT solution using the upper-bound)
+        \item To improve the quality of the solution, the edge probability distribution can be sampled according to a uniform and adaptive scheme. Refer to the paper for the full description of these.
+    \end{enumerate}
+    
+\end{enumerate}
 
 \noindent
+\rule{\textwidth}{0.01in}
 \textbf{Paper:}~ 
 S. Myers and J. Leskovec, ``Clash of the Contagions: Cooperation and
 Competition in Information Diffusion", \emph{Proc. IEEE Intl. Conf. Data Mining}
