@@ -84,7 +84,8 @@ Arxiv Report arXiv:1105.3424v1, 2011, 14 pages.
 
 \item A. Stanoev, D. Trpevski,and L. Kocarev, "Modeling the Spread of Multiple Concurrent Contagions on Networks", PlosOne Vol. 9 pp. 1--16.
 \item Wei Chen, Chi Wang, and Yajun Wang. 2010. Scalable influence maximization for prevalent viral marketing in large-scale social networks. In Proceedings of the 16th ACM SIGKDD international conference on Knowledge discovery and data mining (KDD ’10). Association for Computing Machinery, New York, NY, USA, 1029–1038. 
-  
+
+\item Wei Chen, Yajun Wang, and Siyu Yang. 2009. Efficient influence maximization in social networks. In Proceedings of the 15th ACM SIGKDD international conference on Knowledge discovery and data mining (KDD ’09). Association for Computing Machinery, New York, NY, USA, 199–208. DOI:https://doi.org/10.1145/1557019.1557047  
 
 \end{enumerate}
 
@@ -289,7 +290,7 @@ Coinfection on Contact Networks", \emph{PLOS One}, Vol. 8, No. 8, Aug. 2013,
     \item Model
     \item \begin{enumerate}
         \item General framework for an arbitrary number of contagions.
-        \item Assumes all edges share the infection probability for each disease. I.E., there are global rates $\Beta_{1},\Beta_{2},...$
+        \item Assumes all edges share the infection probability for each disease. I.E., there are global rates $\beta_{1},\beta_{2},...$
         \item Provides a numerical approximation for the update rule that closely fits the true update
         \item Handles multiple successful infections by choosing one successful infection uniformly randomly.
     \end{enumerate}
@@ -339,12 +340,34 @@ Chen et al., "Robust Influence Maximization", \emph{KDD '16: Proceedings of the 
     \end{enumerate}
     
 \end{enumerate}
+\noindent
+\rule{\textwidth}{0.01in}
+\textbf{Paper:}~ Wei Chen, Yajun Wang, and Siyu Yang. 2009. Efficient influence maximization in social networks. In Proceedings of the 15th ACM SIGKDD international conference on Knowledge discovery and data mining (KDD ’09). Association for Computing Machinery, New York, NY, USA, 199–208.
+\begin{enumerate}
+    \item Model: This paper proposes heuristics for the independent and weighted cascade models. I think only the independent cascade model is relevant to us.
+    \item The new heuristic attempts to handle the large number of iterations that the Kempe,Kleinberg,Tardos (KKT) model incurs while estimating the influence spread through Monte Carlo simulations.
+    \item Several new methods are proposed: \begin{enumerate}
+        \item NewGreedyIC \begin{enumerate}
+            \item Rather than run R Monte Carlo simulations for each node, the NewGreedyIC generates R subgraphs and computes the number of reachable nodes for each node in the graph on each particular subgraph.
+            \item This provides roughly the same quality of estimation as the original KKT approximation with a lower cost.
+        \end{enumerate}
+        \item SingleDiscount \begin{enumerate}
+            \item Uses the highest degree centrality measure as a heuristic to choose seed nodes.
+            \item When a seed is chosen, it's neighbors degrees are decremented.
+        \end{enumerate}
+        \item DegreeDiscountIC \begin{enumerate}
+            \item This heuristic uses a new degree discount heuristic that accounts for the probability of one of the node's selected neighbors influencing the node's neighbors through it.
+            \item For the case of equal edge weights, DegreeDiscountIC tracks the performance of the original KKT algorithm.
+        \end{enumerate}
+    \end{enumerate}
+\end{enumerate}
+
 
 \noindent
 \rule{\textwidth}{0.01in}
 \textbf{Paper:}~ Wei Chen, Chi Wang, and Yajun Wang. 2010. Scalable influence maximization for prevalent viral marketing in large-scale social networks. In Proceedings of the 16th ACM SIGKDD international conference on Knowledge discovery and data mining (KDD ’10). Association for Computing Machinery, New York, NY, USA, 1029–1038. 
 \begin{enumerate}
-    \item This paper presents a 1 - \frac{1}{e} approximation algorithm for the single-contagion influence maximization problem.
+    \item This paper presents a $1 - \frac{1}{e}$ approximation algorithm for the single-contagion influence maximization problem.
     \item They present MIA (Maximum influence approximation) which greedily adds seeds by choosing those with the greatest marginal influence.
     \item The marginal influence of a potential seed node is estimated by removing areas of the network which the infection is unlikely to spread to from this node.
     
