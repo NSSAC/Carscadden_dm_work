@@ -52,6 +52,11 @@
 \newcommand{\istate}{\mbox{$\mathbb{I}$}}
 \newcommand{\rstate}{\mbox{$\mathbb{R}$}}
 
+\newcommand{\ione}{\mbox{$\mathbb{I}_1$}}
+\newcommand{\itwo}{\mbox{$\mathbb{I}_2$}}
+\newcommand{\ionetwo}{\mbox{$\mathbb{I}_{1,2}$}}
+
+
 \begin{center}
 \dunder{\Large{\textbf{Ideas for Experiments}}}
 \end{center}
@@ -60,20 +65,63 @@
 \medskip
 
 \section{Previous Work:}
-The work in \cite{Beutel_Interacting} mainly focuses on infectivity ratios to understand the co-existence threshold; furthermore, there is an assumption of homogeneous mixing, so novel research may reveal that conclusions achieved in \cite{10.1145/2339530.2339601} may not hold for other graph structures. The work in \cite{Karrer_2011} assumes cross-immunity whereas this work will assume independence. This affects the graph structure. Additionally, many of the conclusions of \cite{Karrer_2011} focus on the co-existence threshold as the number of nodes grows to infinity. They discuss some of the changes that finite-size effects have but do not explore this fully.
+The work in \cite{Beutel_Interacting} mainly focuses on infectivity
+ratios to understand the co-existence threshold; furthermore, there
+is an assumption of homogeneous mixing. 
+So, it is of interest to investigate how 
+the conclusions in \cite{Beutel_Interacting} are affected
+when other graph structures are considered.
+The work in \cite{Karrer_2011}
+assumes cross-immunity between two contagions whereas 
+this work will assume independence between the contagions. 
+Under our assumption, we will also investigate the role played 
+by the graph structure. 
+Additionally, many of the conclusions
+of \cite{Karrer_2011} focus on the co-existence threshold as the
+number of nodes grows to infinity. They discuss some of the consequences
+finite-size effects but do not explore this fully.
 
 \section{Influence of graph structures on co-existence} 
+
 \subsection{Model}
-    We will be using the SIR SyDS model with some modifications. There will be two
-    contagions $I_{1}$ and $I_{2}$. The underlying graph, $G(V,E)$, will be a directed graph
-    containing nodes $V$ with five possible states susceptible, $I_{1}, I_{2}, I_{1}I_{2}$, and recovered. Each edge will contain two probabilities $p_{I_{1}}$ and $p_{I_{2}}$ that correspond to the probability of transmitting $I_{1}$ and $I_{2}$ respectively. \\ \\ 
-    The transition time from susceptible to recovered/removed will be specified by a random variable shared by the contagions and, likewise, for recovered/removed to susceptible. Assume that contagions are independent of each other.
-\subsection{Experiment Idea 1}
-    Choose two seed nodes that have a similar out-degree and run a simulation to see if the infections for both nodes
-    converge to a fixed points. Each contagion will have it's edge probabilities selected from a random variable that holds constant across simulations. Simulations should be run where edge probabilities are selected from several cases: ecological neutrality case (\cite{LIPSITCH20092} dicsusses the importance of this) where the probabilities are i.i.d., the case where one distribution is slightly more infectious, and the case where one distribution is vastly more infectious.
-    \\ \\
-    Run simulations where the graph is tweaked  to exhibit more or less of a given type of structure. Use the outcomes of these trails to determine a threshold at which both infections co-exist in the limit. \\
-    Properties to Test:
+We will use the SIR SyDS model with some modifications. There
+are two contagions denoted by \cone{} and \ctwo. The underlying graph,
+$G(V,E)$, is a directed graph where each node in $V$ may be in one of five
+possible states, namely \sstate{} (Susceptible), 
+\ione{} (Infected by \cone{} only), 
+\itwo{} (Infected by \ctwo{} only), 
+\ionetwo{} (Infected by both \cone{} and \ctwo{}), and
+\rstate{} (Recovered). 
+Each edge is associated with two probability values, denoted by $p_1$ and
+$p_2$ that correspond to the probability of transmitting contagions
+\cone{} and \ctwo{} respectively. 
+
+The transition time from \sstate{} to \rstate{} will be specified by a random
+variable shared by the contagions. A similar specification is used for
+the transition from  \rstate{} to \sstate.
+We assume that contagions are independent of each other.
+
+\subsection{Experimental Idea 1}
+
+Choose two seed nodes that have a similar out-degree and run a
+simulation to see if the infections for both nodes converge to 
+fixed points. Each contagion will have its edge probabilities
+selected from a random variable that holds constant across simulations.
+Simulations should be run where edge probabilities are selected
+from several cases: ecological neutrality case (\cite{LIPSITCH20092}
+discusses the importance of this) where the probabilities are i.i.d.,
+the case where one distribution is slightly more infectious, and
+the case where one distribution is vastly more infectious.
+
+Run simulations where the graph is tweaked  to exhibit more or less
+of a given type of structure. Use the outcomes of these trails to
+determine a threshold at which both infections co-exist in the
+limit.
+
+\medskip
+
+\noindent
+\textbf{Properties to Test:}
     \begin{enumerate}
         \item Degree distribution
         \item Assortativity:
@@ -85,13 +133,22 @@ The work in \cite{Beutel_Interacting} mainly focuses on infectivity ratios to un
 
 
 \section{Financial Contagions}
-In \cite{CACCIOLI201550}, sources of risk that together create source of systemic risk which allows an epidemic of bankruptcy to spread through banking networks is discussed. There could be potential to explore the interaction between financial contagion and other forms such as social or disease.
+
+In \cite{CACCIOLI201550}, sources of risk that together create
+source of systemic risk which allows an epidemic of bankruptcy to
+spread through banking networks is discussed. There could be potential
+to explore the interaction between financial contagion and other
+forms such as social or disease.
 
 \section{Graph Inference with Multiple Contagions}
-There are many graph inference methods for social networks that rely on a single social contagion. These could be extended for networks on which we have information for multiple contagions to improve the accuracy of inference.
+
+There are many graph inference methods for social networks that
+rely on a single social contagion. These could be extended for
+networks on which we have information for multiple contagions to
+improve the accuracy of inference.
 
 
-
+%%%%%%%%%%%%%%%%%%  Bibliography %%%%%%%%%%%%%%%%%%
 
 \bibliographystyle{plain}
 \bibliography{references.bib}
