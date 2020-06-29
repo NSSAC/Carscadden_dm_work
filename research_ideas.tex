@@ -136,10 +136,33 @@ In \cite{DegreeDiscount}, Chen et al. describe a degree-based heuristic, DegreeD
 Given contagions \cone{}, \ctwo{}, let us define an extension of this heuristic. Let us denote $i_{\mathcal{C}_{i,j},v}$ as the interaction term for node $v$ and contagions $\mathcal{C}_{i}$ and $\mathcal{C}_{j}$. If node $v$ is not infected with $\mathcal{C}_{i}$ or $\mathcal{C}_{i}$ does interact with $\mathcal{C}_{j}$, $i_{\mathcal{C}_{i,j},v} = 0$. If the two contagions cooperate, $0 < i_{\mathcal{C}_{i,j},v}$. If the two contagions compete, then, $i_{\mathcal{C}_{i,j},v} < 0$. In the single contagion independent cascade model, a disease is spread between nodes with probability $p$. In the two contagion context, a disease $\cone{}$ is spread from node $u$ to $v$ with probability $\min\{1, p_{1}(1+i_{\mathcal{C}_{1,2},v}\}$; vice versa is true for the spread of $\ctwo{}$. Let $\mathcal{N}_{\cone{}}(u)$ denote the neighbors infected with \cone{} and $\mathcal{N}_(u)$ denote the neighbors of u. Similarly to the DegreeDiscountIC heuristic for contagion \cone{}, we will focus on the expected number of neighbors infected by some node $u$ in one time step given that $u$ is not infected by a neighbor with \cone{}. This is given by $(\prod_{v\in \mathcal{N}_{\cone{}z}(u)}(1-\min\{1, p_{1}(1+i_{\mathcal{C}_{2,1},u}\}))(1+\Sigma_{w \in  (\mathcal{N}(u) \mathcal{N}_{\cone{}z}(u))}(p_{\cone{}}(1-i_{\mathcal{C}_{2,1},w}))$. Let denote this quantity by $dd_{\cone{}, u}$. Note that the computation is analgous for \ctwo{}.
 
 Applying the degree heuristic to maximize the total number of infected nodes is not as simple as in the single contagion case of DegreeDiscountIC since choosing the seed node with the highest expected total infection due to contagion interaction. Some possible ideas that I have to deal with this are below:
+
+
 \begin{enumerate}
     \item Naive: At every step, choose the node with the highest degree heuristic
     \item Initialize the seed set with the node with the contagion with the highest degree heuristic. For every subsequent, choose the node $v$ that maximizes $dd_{\mathcal{C}_i,v} + \Sigma_{u\in S}($increase in$ dd_{\mathcal{C}_i,u})$ where $S$ denotes the nodes currently in the seed set.
 \end{enumerate}
+
+For small graphs and seed sets, we can compare the new heuristic to an adaption of the KKT approximation algorithm to the multiple cooperating contagion case. This is described below:
+
+$S = \emptyset$
+
+for seed in range(k):
+
+\indent for node in $G.V$
+
+\indent\indent for $i$ in $\{\cone{}, \ctwo{}\}$
+
+\indent\indent\indent for r in range(R)
+
+\indent\indent\indent\indent $node.infected[i] += |RanCascade(S \bigcup \{node\})|$ 
+
+\indent\indent\indent $node.infected[i] /= R$
+
+\indent\indent $S = S \bigcup argmax_{v\in G.V}max_{i\in\cone{}, \ctwo{}} v.infected[i]$ 
+
+
+
 
 \section{Financial Contagions}
 
