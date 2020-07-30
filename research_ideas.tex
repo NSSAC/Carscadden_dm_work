@@ -153,20 +153,58 @@ $S = \emptyset$
 
 for seed in range(k):
 
-\indent for node in $G.V$
+\indent\indent for node in $G.V$
 
-\indent\indent for $i$ in $\{\cone{}, \ctwo{}\}$
+\indent\indent\indent for $i$ in $\{\cone{}, \ctwo{}\}$
 
-\indent\indent\indent for r in range(R)
+\indent\indent\indent\indent for r in range(R)
 
-\indent\indent\indent\indent $node.infected[i] += |RanCascade(S \bigcup \{node\})|$ 
+\indent\indent\indent\indent\indent $node.infected[i] += |RanCascade(S \bigcup \{node\})|$ 
 
-\indent\indent\indent $node.infected[i] /= R$
+\indent\indent\indent\indent $node.infected[i] /= R$
 
-\indent\indent $S = S \bigcup argmax_{v\in G.V}max_{i\in\cone{}, \ctwo{}} v.infected[i]$ 
+\indent\indent\indent $S = S \bigcup argmax_{v\in G.V}max_{i\in\cone{}, \ctwo{}} v.infected[i]$ 
+
+\subsection{Experiment Plan: Cooperating Contagion on the Multiple Independent Cascade Model}
+Using the NDLib library, we can define discrete-time independent cascade models easily. However, note that we are restricted to homogeneous transition probabilities across the edges. 
+
+Graph Parameters:
+
+We will perform experiments using two random graph generation models: Erdos-Renyi and Barabasi-Albert as implemented in NetworkX 2.4. 
+We will use graphs with 100, 1000, 10000, 50000, 100000, and 1000000 nodes.
+% Consult Ravi on good set of parameters to choose for the E-R and Barabasi-Albert models.
+
+Model:
 
 
+We will choose run the independent cascade model with two contagions considering two cases. We will run iterations that represent .2 * (number of nodes in the graph). The recovery/removed probability will chosen from [.01, .05, .1, 1].
 
+
+In the first case, the contagions will act independently, and infection with one will not impact the chance of infection with the other. We will simulate the spread where transition probabilities for each contagion is chosen from the Cartesian product of [.01,.05,.1,.2] and [.01,.05,.1,.2].  
+
+
+In the second case, infection with one contagion will additively increase the chance of infection with the other. The increase will be chose from the Cartesian product of [0, .05, .1] and [0,.05, .1]. The base transition probabilities will be chosen from the Cartesian product of [.01,.05,.1,.2] and [.01,.05,.1,.2].
+
+
+Heuristics:
+
+
+We will apply heuristics and approximation schemes to maximize the total number of infected numbers for both contagions. The proportion of nodes chosen as seeds will be [.01, .05] of the total nodes. The following heuristics will chose seeds based on these:
+
+
+Random assignment: Choose the requested number of seeds uniformly randomly deciding which contagion the seed node will be assigned to with a coin flip.
+
+
+Modified KKT: Use the modified KKT above to chose the requested number of seeds. 
+
+
+Eigenvector Centrality: Choose nodes by decreasing eigenvector centrality and assign them to the contagion with a higher infection probability. Coin flips will be used for tie-breakers. 
+
+
+Degree Discounting Heuristic: Use the generalized degree discounting heuristics described above.
+
+
+Degree Distribution: Choose nodes by decreasing degree and assign them to the contagion with a higher infection probability. Coin flips will be used for tie-breakers.
 
 \section{Financial Contagions}
 
