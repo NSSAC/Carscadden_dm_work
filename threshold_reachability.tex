@@ -1,0 +1,20 @@
+Given $C$ is it possible to reach $C^{'}$?
+
+while $C \neq C^{'}$
+
+\indent for infected node in $C$
+
+\indent\indent for neighbor of infected node:
+
+\indent\indent\indent if neighbor state is $\geq$ neighbor state in $C^{'}$
+
+\indent\indent\indent\indent return False (System is progressive)
+
+\indent\indent\indent update state of neighbor(check the state of the neighbor's neighbors of which it has at most $V$)
+
+\indent if no state is updated
+
+\indent\indent return False
+
+
+I believe the above is $O(V^{4})$

@@ -133,7 +133,11 @@ limit.
 \subsection{Two-contagion DegreeDiscountIC}
 In \cite{DegreeDiscount}, Chen et al. describe a degree-based heuristic, DegreeDiscountIC, that selects seeds for the influence maximization problem by calculating the expected number of nodes infected by the node in consideration given that it is not infected by another node. This simple heuristic works quite well on graphs with low infection probabilities. Furthermore, it runs fast and outperforms other simple heuristics.
 
-Given contagions \cone{}, \ctwo{}, let us define an extension of this heuristic. Let us denote $i_{\mathcal{C}_{i,j},v}$ as the interaction term for node $v$ and contagions $\mathcal{C}_{i}$ and $\mathcal{C}_{j}$. If node $v$ is not infected with $\mathcal{C}_{i}$ or $\mathcal{C}_{i}$ does interact with $\mathcal{C}_{j}$, $i_{\mathcal{C}_{i,j},v} = 0$. If the two contagions cooperate, $0 < i_{\mathcal{C}_{i,j},v}$. If the two contagions compete, then, $i_{\mathcal{C}_{i,j},v} < 0$. In the single contagion independent cascade model, a disease is spread between nodes with probability $p$. In the two contagion context, a disease $\cone{}$ is spread from node $u$ to $v$ with probability $\min\{1, p_{1}(1+i_{\mathcal{C}_{1,2},v}\}$; vice versa is true for the spread of $\ctwo{}$. Let $\mathcal{N}_{\cone{}}(u)$ denote the neighbors infected with \cone{} and $\mathcal{N}_(u)$ denote the neighbors of u. Similarly to the DegreeDiscountIC heuristic for contagion \cone{}, we will focus on the expected number of neighbors infected by some node $u$ in one time step given that $u$ is not infected by a neighbor with \cone{}. This is given by $(\prod_{v\in \mathcal{N}_{\cone{}z}(u)}(1-\min\{1, p_{1}(1+i_{\mathcal{C}_{2,1},u}\}))(1+\Sigma_{w \in  (\mathcal{N}(u) \mathcal{N}_{\cone{}z}(u))}(p_{\cone{}}(1-i_{\mathcal{C}_{2,1},w}))$. Let denote this quantity by $dd_{\cone{}, u}$. Note that the computation is analgous for \ctwo{}.
+% Given contagions \cone{}, \ctwo{}, let us define an extension of this heuristic. Let us denote $i_{\mathcal{C}_{i,j},v}$ as the interaction term for node $v$ and contagions $\mathcal{C}_{i}$ and $\mathcal{C}_{j}$. If node $v$ is not infected with $\mathcal{C}_{i}$ or $\mathcal{C}_{i}$ does interact with $\mathcal{C}_{j}$, $i_{\mathcal{C}_{i,j},v} = 0$. If the two contagions cooperate, $0 < i_{\mathcal{C}_{i,j},v}$. If the two contagions compete, then, $i_{\mathcal{C}_{i,j},v} < 0$. In the single contagion independent cascade model, a disease is spread between nodes with probability $p$. In the two contagion context, a disease $\cone{}$ is spread from node $u$ to $v$ with probability $\min\{1, p_{1}(1+i_{\mathcal{C}_{1,2},v})\}$; vice versa is true for the spread of $\ctwo{}$. Let $\mathcal{N}_{\cone{}}(u)$ denote the neighbors infected with \cone{} and $\mathcal{N}_(u)$ denote the neighbors of u. Similarly to the DegreeDiscountIC heuristic for contagion \cone{}, we will focus on the expected number of neighbors infected by some node $u$ in one time step given that $u$ is not infected by a neighbor with \cone{}. This is given by $(\prod_{v\in \mathcal{N}_{\cone{}z}(u)}(1-\min\{1, p_{1}(1+i_{\mathcal{C}_{2,1},u}\}))(1+\Sigma_{w \in  (\mathcal{N}(u) \mathcal{N}_{\cone{}z}(u))}(p_{\cone{}}(1-i_{\mathcal{C}_{2,1},w}))$. Let denote this quantity by $dd_{\cone{}, u}$. Note that the computation is analgous for \ctwo{}.
+Before introducing a model for how two contagions interact, let us introduce a general form of the DegreeDiscountIC heuristic for multiple contagions. Let $\mathcal{C}_{i}(u)$ be the indicator random variable that denotes whether or not node $u$ is infected with $\mathcal{C}_{i}$. Let $\mathbf{I}_{C_{k}}(u,v)$ be the event that node $u$ transmits $\mathcal{C}_k$ to node $v$. The two contagion extension of DegreeDiscountIC for \cone{} is: $(\prod_{v\in \mathbf{}{N}_{\cone{}}(u)}(1-P[\mathbf{I}_{\cone}(v,u)|\ctwo(u) ]))(1+\Sigma_{w \in  (\mathbf{N}(u)-  \mathbf{N}_{\cone{}}(u))}(P[\mathbf{I}_{\cone}(u,w)|\ctwo(w)]))$, and the version for \ctwo{} is analogous.
+    
+Given contagions \cone{}, \ctwo{}, let us define an extension of this heuristic. Let us denote $i_{C_{k,j}}(v)$ as the additive interaction term for node $v$ and contagions $\mathcal{C}_{k}$ and $\mathcal{C}_{j}$. Let us restrict $i_{C_{k,j}}(u, v)$ to $[p_{\mathcal{C}_{k}}(u,v)+1, 1-p_{\mathcal{C}_{k}}(u,v)]$ where $p_{\mathcal{C}_{k}}(u,v)$ is the probability that node $u$ transmits $\mathcal{C}_{k}$ to node $v$. If node $v$ does not have $\mathcal{C}_j$, interaction term does nothing. If node $v$ has $\mathcal{C}_j$ and the two contagions cooperate, the transmission probability of $\mathcal{C}_k$ is now $p_{\mathcal{C}_{k}}(u,v) + i_{C_{k,j}}(v) > p_{\mathcal{C}_{k}}(u,v)$. If the contagions are independent, the transmission probability is unchanged. If they compete and node $v$ has $\mathcal{C}_j$, then,  the transmission probability is $p_{\mathcal{C}_{k}}(u,v) + i_{C_{k,j}}(v) < p_{\mathcal{C}_{k}}(u,v)$. We will call this model Additive Multiple Independent Cascade (AMIC). Similar to the regular independent cascade heuristic of Chen et al., we propose DegreeDiscountAMIC.   This is given by $(\prod_{v\in \mathbf{}{N}_{\cone{}}(u)}(1-p_{\cone{}}(v,u) + i_{C_{1,2}}(u)))(1+\Sigma_{w \in  (\mathbf{N}(u)-  \mathbf{N}_{\cone{}}(u))}(p_{\cone{}}(u,w)+ i_{C_{1,2}}(w)))$. Let denote this quantity by $dd_{\cone{}, u}$. Note that the computation is analgous for \ctwo{}.
+
 
 Applying the degree heuristic to maximize the total number of infected nodes is not as simple as in the single contagion case of DegreeDiscountIC since choosing the seed node with the highest expected total infection due to contagion interaction. Some possible ideas that I have to deal with this are below:
 
@@ -149,20 +153,60 @@ $S = \emptyset$
 
 for seed in range(k):
 
-\indent for node in $G.V$
+\indent\indent for node in $G.V$
 
-\indent\indent for $i$ in $\{\cone{}, \ctwo{}\}$
+\indent\indent\indent for $i$ in $\{\cone{}, \ctwo{}\}$
 
-\indent\indent\indent for r in range(R)
+\indent\indent\indent\indent for r in range(R)
 
-\indent\indent\indent\indent $node.infected[i] += |RanCascade(S \bigcup \{node\})|$ 
+\indent\indent\indent\indent\indent $node.infected[i] += |RanCascade(S \bigcup \{node\})|$ 
 
-\indent\indent\indent $node.infected[i] /= R$
+\indent\indent\indent\indent $node.infected[i] /= R$
 
-\indent\indent $S = S \bigcup argmax_{v\in G.V}max_{i\in\cone{}, \ctwo{}} v.infected[i]$ 
+\indent\indent\indent $S = S \bigcup argmax_{v\in G.V}max_{i\in\cone{}, \ctwo{}} v.infected[i]$ 
+
+\subsection{Experiment Plan: Cooperating Contagion on the Multiple Independent Cascade Model}
+Using the NDLib library, we can define discrete-time independent cascade models easily. However, note that we are restricted to homogeneous transition probabilities across the edges. Simulations will be repeated 30 times for statistical significance under each of the parameters to ensure statistical significance. Seeds from experiments as well as codes will be saved and made available with any publication. Standard statistical tests will be performed to determine if the mean infected nodes differs significantly between seed choice methods. 
 
 
+Graph Parameters:
 
+We will perform experiments using two random graph generation models: Erdos-Renyi and Barabasi-Albert as implemented in NetworkX 2.4. 
+We will use graphs with 100, 1000, 10000, 50000, 100000, and 1000000 nodes.
+% Consult Ravi on good set of parameters to choose for the E-R and Barabasi-Albert models.
+
+
+Model:
+
+
+We will choose run the independent cascade model with two contagions considering two cases. We will run iterations that represent .2 * (number of nodes in the graph). The recovery/removed probability will chosen from [.01, .05, .1, 1].
+
+
+In the first case, the contagions will act independently, and infection with one will not impact the chance of infection with the other. We will simulate the spread where transition probabilities for each contagion is chosen from the Cartesian product of [.01,.05,.1,.2] and [.01,.05,.1,.2].  
+
+
+In the second case, infection with one contagion will additively increase the chance of infection with the other. The increase will be chose from the Cartesian product of [0, .05, .1] and [0,.05, .1]. The base transition probabilities will be chosen from the Cartesian product of [.01,.05,.1,.2] and [.01,.05,.1,.2].
+
+
+Heuristics:
+
+
+We will apply heuristics and approximation schemes to maximize the total number of infected numbers for both contagions. The proportion of nodes chosen as seeds will be [.01, .05] of the total nodes. The following heuristics will chose seeds based on these:
+
+
+Random assignment: Choose the requested number of seeds uniformly randomly deciding which contagion the seed node will be assigned to with a coin flip. This will serve as a control strategy.
+
+
+Modified KKT: Use the modified KKT above to chose the requested number of seeds. Note: This may only be used on the smaller graphs due to run-time constraints.
+
+
+Eigenvector Centrality: Choose nodes by decreasing eigenvector centrality and assign them to the contagion with a higher infection probability. Coin flips will be used for tie-breakers. 
+
+
+Degree Discounting Heuristic: Use the generalized degree discounting heuristics described above.
+
+
+Degree Distribution: Choose nodes by decreasing degree and assign them to the contagion with a higher infection probability. Coin flips will be used for tie-breakers.
 
 \section{Financial Contagions}
 
