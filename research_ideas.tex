@@ -137,7 +137,7 @@ limit.
 
 The multiple IC (Independent Cascade) model proposed is an extension of the model seen earlier in \cite{KKT_Greedy}. In the single contagion IC model, a given node, $u$, that is in state $\istate{}$ at time $t$ attempts to infect each of its neighbors, $v$, with a given probability $p$, and at time $t+1$, $u$ enters the removed state $\rstate{}$. Iteration continues until all infected nodes have been removed. 
 
-The transitions are not as simple in multiple IC model. In the case of full immunity, there are five states \sstate{}, \ione{}, \itwo{}, \ionetwo{}, and \rstate{}. Enumerated below are the set of possible transitions:
+The transitions are not as simple in multiple IC model. We will look at several cases. In the first, there are five states \sstate{}, \ione{}, \itwo{}, \ionetwo{}, and \rstate{}. Enumerated below are the set of possible transitions:
 $    \{\sstate \rightarrow \ione{},
     \sstate \rightarrow \itwo{},
     \sstate \rightarrow \ionetwo{},
@@ -146,7 +146,30 @@ $    \{\sstate \rightarrow \ione{},
     \ione \rightarrow \rstate{},
     \itwo \rightarrow \rstate{},
     \ionetwo \rightarrow \rstate
-\} $. If node is activated by a contagion at time $t$, it must be re-activated by a node infected with the other contagion at time $t+1$, or it will enter \rstate{} and no longer be capable of activating. A node cannot be activated by both contagions simultaneously unless it enters this state from $\sstate{}$. This version of the model is most compatible with social contagions in which an individual becomes excited by an idea or product and will lose interest until re-engaged. 
+\} $. If node is activated by a contagion at time $t$, it must be re-activated by a node infected with the other contagion at time $t+1$, or it will enter \rstate{} and no longer be capable of activating. A node cannot be activated by both contagions simultaneously unless it enters this state from $\sstate{}$. This version of the model is most compatible with social contagions in which an individual becomes excited by an idea or product and will lose interest until re-engaged. A situation such as this could arise when two products or ideas are spreading that are related but not perfect substitutes. Note that the transitions $\{\ione \rightarrow \ionetwo{},
+    \itwo \rightarrow \ionetwo{}\}$ are not considered. Because in the single contagion IC model an infected node only has one time step to transmit the contagion, I do not want the model to allow the scenario in which a node is in $\ione{}$, transitions to $\ionetwo{}$, and continues spreading $\ione{}$, so I do not allow this possible to keep with the spirit of the single contagion IC model.
+    
+A second case has the transitions: $    \{\sstate \rightarrow \ione{},
+    \sstate \rightarrow \itwo{},
+    \sstate \rightarrow \ionetwo{},
+    \ione \rightarrow \rstate{},
+    \itwo \rightarrow \rstate{},
+    \ionetwo \rightarrow \rstate
+\} $ This most closely reflects a social contagion scenario in which nodes may only be active with an infection for one time step before losing interest. A situation like this would arise for very closely related products or ideas and almost perfect substitutes.
+
+% A third case has the transitions: $
+% $    \{\sstate \rightarrow \ione{},
+%     \sstate \rightarrow \itwo{},
+%     \sstate \rightarrow \ionetwo{},
+%     \ione \rightarrow \itwo{},
+%     \itwo \rightarrow \ione{},
+%     \ione \rightarrow \rstate{},
+%     \itwo \rightarrow \rstate{},
+%     \ionetwo \rightarrow \rstate
+% \} $
+% $
+    
+
 
 
 \subsection{Two-contagion DegreeDiscountIC}
