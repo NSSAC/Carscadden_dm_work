@@ -55,6 +55,8 @@
 \newcommand{\ione}{\mbox{$\mathbb{I}_1$}}
 \newcommand{\itwo}{\mbox{$\mathbb{I}_2$}}
 \newcommand{\ionetwo}{\mbox{$\mathbb{I}_{1,2}$}}
+\newcommand{\rone}{\mbox{$\mathbb{R}_1$}}
+\newcommand{\rtwo}{\mbox{$\mathbb{R}_2$}}
 
 \begin{center}
 \dunder{\Large{\textbf{Ideas for Experiments}}}
@@ -129,6 +131,23 @@ limit.
             \item Assortativity coefficient
         \end{enumerate}
     \end{enumerate}
+\section{Multiple Independent Cascade}
+
+\subsection{Model Specification}
+
+The multiple IC (Independent Cascade) model proposed is an extension of the model seen earlier in \cite{KKT_Greedy}. In the single contagion IC model, a given node, $u$, that is in state $\istate{}$ at time $t$ attempts to infect each of its neighbors, $v$, with a given probability $p$, and at time $t+1$, $u$ enters the removed state $\rstate{}$. Iteration continues until all infected nodes have been removed. 
+
+The transitions are not as simple in multiple IC model. In the case of full immunity, there are five states \sstate{}, \ione{}, \itwo{}, \ionetwo{}, and \rstate{}. Enumerated below are the set of possible transitions:
+$    \{\sstate \rightarrow \ione{},
+    \sstate \rightarrow \itwo{},
+    \sstate \rightarrow \ionetwo{},
+    \ione \rightarrow \itwo{},
+    \itwo \rightarrow \ione{},
+    \ione \rightarrow \rstate{},
+    \itwo \rightarrow \rstate{},
+    \ionetwo \rightarrow \rstate
+\} $. If node is activated by a contagion at time $t$, it must be re-activated by a node infected with the other contagion at time $t+1$, or it will enter \rstate{} and no longer be capable of activating. A node cannot be activated by both contagions simultaneously unless it enters this state from $\sstate{}$. This version of the model is most compatible with social contagions in which an individual becomes excited by an idea or product and will lose interest until re-engaged. 
+
 
 \subsection{Two-contagion DegreeDiscountIC}
 In \cite{DegreeDiscount}, Chen et al. describe a degree-based heuristic, DegreeDiscountIC, that selects seeds for the influence maximization problem by calculating the expected number of nodes infected by the node in consideration given that it is not infected by another node. This simple heuristic works quite well on graphs with low infection probabilities. Furthermore, it runs fast and outperforms other simple heuristics.
