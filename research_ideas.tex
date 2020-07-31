@@ -52,11 +52,16 @@
 \newcommand{\istate}{\mbox{$\mathbb{I}$}}
 \newcommand{\rstate}{\mbox{$\mathbb{R}$}}
 
+
+
 \newcommand{\ione}{\mbox{$\mathbb{I}_1$}}
 \newcommand{\itwo}{\mbox{$\mathbb{I}_2$}}
 \newcommand{\ionetwo}{\mbox{$\mathbb{I}_{1,2}$}}
 \newcommand{\rone}{\mbox{$\mathbb{R}_1$}}
 \newcommand{\rtwo}{\mbox{$\mathbb{R}_2$}}
+\newcommand{\sone}{\mbox{$\mathbb{S}_1$}}
+\newcommand{\stwo}{\mbox{$\mathbb{S}_2$}}
+
 
 \begin{center}
 \dunder{\Large{\textbf{Ideas for Experiments}}}
@@ -137,25 +142,37 @@ limit.
 
 The multiple IC (Independent Cascade) model proposed is an extension of the model seen earlier in \cite{KKT_Greedy}. In the single contagion IC model, a given node, $u$, that is in state $\istate{}$ at time $t$ attempts to infect each of its neighbors, $v$, with a given probability $p$, and at time $t+1$, $u$ enters the removed state $\rstate{}$. Iteration continues until all infected nodes have been removed. 
 
-The transitions are not as simple in multiple IC model. We will look at several cases. In the first, there are five states \sstate{}, \ione{}, \itwo{}, \ionetwo{}, and \rstate{}. Enumerated below are the set of possible transitions:
-$    \{\sstate \rightarrow \ione{},
-    \sstate \rightarrow \itwo{},
-    \sstate \rightarrow \ionetwo{},
-    \ione \rightarrow \itwo{},
-    \itwo \rightarrow \ione{},
-    \ione \rightarrow \rstate{},
-    \itwo \rightarrow \rstate{},
-    \ionetwo \rightarrow \rstate
-\} $. If node is activated by a contagion at time $t$, it must be re-activated by a node infected with the other contagion at time $t+1$, or it will enter \rstate{} and no longer be capable of activating. A node cannot be activated by both contagions simultaneously unless it enters this state from $\sstate{}$. This version of the model is most compatible with social contagions in which an individual becomes excited by an idea or product and will lose interest until re-engaged. A situation such as this could arise when two products or ideas are spreading that are related but not perfect substitutes. Note that the transitions $\{\ione \rightarrow \ionetwo{},
-    \itwo \rightarrow \ionetwo{}\}$ are not considered. Because in the single contagion IC model an infected node only has one time step to transmit the contagion, I do not want the model to allow the scenario in which a node is in $\ione{}$, transitions to $\ionetwo{}$, and continues spreading $\ione{}$, so I do not allow this possible to keep with the spirit of the single contagion IC model.
+The transitions are not as simple in multiple IC model. We will consider only the 2 contagion case.
+
+In the most general case, each node has a state array of length two where each entry is an integer 0-2. 0 represents susceptibility. 1 represents infection, and 2 represents recovery. For example, a node with state array, [0, 2] is susceptible to contagion 0 and recovered from contagion 2. Much like the original IC model, a node has time step to spread a contagion after which it will enter the recovered state. However, since there are two contagions, a node may become activated for one contagion after recovering from the other. Restrictions may be applied to the transitions in this model to account for cross-immunity; i.e., recovery from one contagion could prevent infection with the other. Here, however, we will consider the more general case. 
+
+\subsection{Contagion Interaction}
+
+For this work, we will focus on the influence maximization problem in the context where the contagions spread independently and cooperatively. We define the influence maximization problem in the setting as follows: Given an input graph $G(V,E)$, an integer $k$, and the transition rules under the general IC model, assign $k$ nodes to be infected with the contagions where each node may only begin infected with one contagion such that the total number of nodes that become infected throughout the diffusion of the contagions is maximized. 
+
+We propose two possible scenarios for the cooperative interaction of nodes in this setting. First, we consider the additive case. Let us denote $i_{C_{k,j}}(v)$ as the additive interaction term for node $v$ and contagions $\mathcal{C}_{k}$ and $\mathcal{C}_{j}$. Let us restrict $i_{C_{k,j}}(v)$ to $[p_{\mathcal{C}_{k}}(u,v)+1, 1-p_{\mathcal{C}_{k}}(u,v)]$ where $p_{\mathcal{C}_{k}}(u,v)$ is the probability that node $u$ transmits $\mathcal{C}_{k}$ to node $v$. If node $v$ does not have $\mathcal{C}_j$, the interaction term does nothing. If node $v$ has $\mathcal{C}_j$ and the two contagions cooperate, the transmission probability of $\mathcal{C}_k$ is now $p_{\mathcal{C}_{k}}(u,v) + i_{C_{k,j}}(v) > p_{\mathcal{C}_{k}}(u,v)$. If the contagions are independent, the transmission probability is unchanged. If they compete and node $v$ has $\mathcal{C}_j$, then,  the transmission probability is $p_{\mathcal{C}_{k}}(u,v) + i_{C_{k,j}}(v) < p_{\mathcal{C}_{k}}(u,v)$. We will refer to the general model described in 3.1 with this additive term as AMIC (Additive Multiple Independent Cascade). 
+
+Second, we consider the multiplicative case. Let us denote $\delta_{C_{k,j}}(v)$ as the multiplicative interaction term for node $v$ and contagions $\mathcal{C}_{k}$ and $\mathcal{C}_{j}$. Let us restrict $\delta_{C_{k,j}}(v)$ to $[-1, \frac{1}{{p_{\mathcal{C}_{k}}(u,v)]}} - 1]$ where $p_{\mathcal{C}_{k}}(u,v)$ is the probability that node $u$ transmits $\mathcal{C}_{k}$ to node $v$. If node $v$ does not have $\mathcal{C}_j$, the interaction term does nothing. If node $v$ has $\mathcal{C}_j$ and the two contagions cooperate, the transmission probability of $\mathcal{C}_k$ is now $(1 + \delta_{C_{k,j}}(v))p_{\mathcal{C}_{k}}(u,v) > p_{\mathcal{C}_{k}}(u,v)$. If the contagions are independent, the transmission probability is unchanged. If they compete and node $v$ has $\mathcal{C}_j$, then,  the transmission probability is $(1 + \delta_{C_{k,j}}(v))p_{\mathcal{C}_{k}}(u,v) < p_{\mathcal{C}_{k}}(u,v)$. We will refer to the general model described in 3.1 with this additive term as MMIC (Multiplicative Multiple Independent Cascade).
+
+% In the first, there are five states \sstate{}, \ione{}, \itwo{}, \ionetwo{}, and \rstate{}. Enumerated below are the set of possible transitions:
+% $    \{\sstate \rightarrow \ione{},
+%     \sstate \rightarrow \itwo{},
+%     \sstate \rightarrow \ionetwo{},
+%     \ione \rightarrow \itwo{},
+%     \itwo \rightarrow \ione{},
+%     \ione \rightarrow \rstate{},
+%     \itwo \rightarrow \rstate{},
+%     \ionetwo \rightarrow \rstate
+% \} $. If node is activated by a contagion at time $t$, it must be re-activated by a node infected with the other contagion at time $t+1$, or it will enter \rstate{} and no longer be capable of activating. A node cannot be activated by both contagions simultaneously unless it enters this state from $\sstate{}$. This version of the model is most compatible with social contagions in which an individual becomes excited by an idea or product and will lose interest until re-engaged. A situation such as this could arise when two products or ideas are spreading that are related but not perfect substitutes. Note that the transitions $\{\ione \rightarrow \ionetwo{},
+%     \itwo \rightarrow \ionetwo{}\}$ are not considered. Because in the single contagion IC model an infected node only has one time step to transmit the contagion, I do not want the model to allow the scenario in which a node is in $\ione{}$, transitions to $\ionetwo{}$, and continues spreading $\ione{}$, so I do not allow this possible to keep with the spirit of the single contagion IC model.
     
-A second case has the transitions: $    \{\sstate \rightarrow \ione{},
-    \sstate \rightarrow \itwo{},
-    \sstate \rightarrow \ionetwo{},
-    \ione \rightarrow \rstate{},
-    \itwo \rightarrow \rstate{},
-    \ionetwo \rightarrow \rstate
-\} $ This most closely reflects a social contagion scenario in which nodes may only be active with an infection for one time step before losing interest. A situation like this would arise for very closely related products or ideas and almost perfect substitutes.
+% A second case has the transitions: $    \{\sstate \rightarrow \ione{},
+%     \sstate \rightarrow \itwo{},
+%     \sstate \rightarrow \ionetwo{},
+%     \ione \rightarrow \rstate{},
+%     \itwo \rightarrow \rstate{},
+%     \ionetwo \rightarrow \rstate
+% \} $ This most closely reflects a social contagion scenario in which nodes may only be active with an infection for one time step before losing interest. A situation like this would arise for very closely related products or ideas and almost perfect substitutes.
 
 % A third case has the transitions: $
 % $    \{\sstate \rightarrow \ione{},
@@ -178,7 +195,7 @@ In \cite{DegreeDiscount}, Chen et al. describe a degree-based heuristic, DegreeD
 % Given contagions \cone{}, \ctwo{}, let us define an extension of this heuristic. Let us denote $i_{\mathcal{C}_{i,j},v}$ as the interaction term for node $v$ and contagions $\mathcal{C}_{i}$ and $\mathcal{C}_{j}$. If node $v$ is not infected with $\mathcal{C}_{i}$ or $\mathcal{C}_{i}$ does interact with $\mathcal{C}_{j}$, $i_{\mathcal{C}_{i,j},v} = 0$. If the two contagions cooperate, $0 < i_{\mathcal{C}_{i,j},v}$. If the two contagions compete, then, $i_{\mathcal{C}_{i,j},v} < 0$. In the single contagion independent cascade model, a disease is spread between nodes with probability $p$. In the two contagion context, a disease $\cone{}$ is spread from node $u$ to $v$ with probability $\min\{1, p_{1}(1+i_{\mathcal{C}_{1,2},v})\}$; vice versa is true for the spread of $\ctwo{}$. Let $\mathcal{N}_{\cone{}}(u)$ denote the neighbors infected with \cone{} and $\mathcal{N}_(u)$ denote the neighbors of u. Similarly to the DegreeDiscountIC heuristic for contagion \cone{}, we will focus on the expected number of neighbors infected by some node $u$ in one time step given that $u$ is not infected by a neighbor with \cone{}. This is given by $(\prod_{v\in \mathcal{N}_{\cone{}z}(u)}(1-\min\{1, p_{1}(1+i_{\mathcal{C}_{2,1},u}\}))(1+\Sigma_{w \in  (\mathcal{N}(u) \mathcal{N}_{\cone{}z}(u))}(p_{\cone{}}(1-i_{\mathcal{C}_{2,1},w}))$. Let denote this quantity by $dd_{\cone{}, u}$. Note that the computation is analgous for \ctwo{}.
 Before introducing a model for how two contagions interact, let us introduce a general form of the DegreeDiscountIC heuristic for multiple contagions. Let $\mathcal{C}_{i}(u)$ be the indicator random variable that denotes whether or not node $u$ is infected with $\mathcal{C}_{i}$. Let $\mathbf{I}_{C_{k}}(u,v)$ be the event that node $u$ transmits $\mathcal{C}_k$ to node $v$. The two contagion extension of DegreeDiscountIC for \cone{} is: $(\prod_{v\in \mathbf{}{N}_{\cone{}}(u)}(1-P[\mathbf{I}_{\cone}(v,u)|\ctwo(u) ]))(1+\Sigma_{w \in  (\mathbf{N}(u)-  \mathbf{N}_{\cone{}}(u))}(P[\mathbf{I}_{\cone}(u,w)|\ctwo(w)]))$, and the version for \ctwo{} is analogous.
     
-Given contagions \cone{}, \ctwo{}, let us define an extension of this heuristic. Let us denote $i_{C_{k,j}}(v)$ as the additive interaction term for node $v$ and contagions $\mathcal{C}_{k}$ and $\mathcal{C}_{j}$. Let us restrict $i_{C_{k,j}}(u, v)$ to $[p_{\mathcal{C}_{k}}(u,v)+1, 1-p_{\mathcal{C}_{k}}(u,v)]$ where $p_{\mathcal{C}_{k}}(u,v)$ is the probability that node $u$ transmits $\mathcal{C}_{k}$ to node $v$. If node $v$ does not have $\mathcal{C}_j$, interaction term does nothing. If node $v$ has $\mathcal{C}_j$ and the two contagions cooperate, the transmission probability of $\mathcal{C}_k$ is now $p_{\mathcal{C}_{k}}(u,v) + i_{C_{k,j}}(v) > p_{\mathcal{C}_{k}}(u,v)$. If the contagions are independent, the transmission probability is unchanged. If they compete and node $v$ has $\mathcal{C}_j$, then,  the transmission probability is $p_{\mathcal{C}_{k}}(u,v) + i_{C_{k,j}}(v) < p_{\mathcal{C}_{k}}(u,v)$. We will call this model Additive Multiple Independent Cascade (AMIC). Similar to the regular independent cascade heuristic of Chen et al., we propose DegreeDiscountAMIC.   This is given by $(\prod_{v\in \mathbf{}{N}_{\cone{}}(u)}(1-p_{\cone{}}(v,u) + i_{C_{1,2}}(u)))(1+\Sigma_{w \in  (\mathbf{N}(u)-  \mathbf{N}_{\cone{}}(u))}(p_{\cone{}}(u,w)+ i_{C_{1,2}}(w)))$. Let denote this quantity by $dd_{\cone{}, u}$. Note that the computation is analgous for \ctwo{}.
+Given contagions \cone{}, \ctwo{}, let us define an extension of this heuristic. Similar to the regular independent cascade heuristic of Chen et al., we propose DegreeDiscountAMIC.   This is given by $(\prod_{v\in \mathbf{}{N}_{\cone{}}(u)}(1-p_{\cone{}}(v,u) + i_{C_{1,2}}(u)))(1+\Sigma_{w \in  (\mathbf{N}(u)-  \mathbf{N}_{\cone{}}(u))}(p_{\cone{}}(u,w)+ i_{C_{1,2}}(w)))$. Let denote this quantity by $dd_{\cone{}, u}$. Note that the computation is analgous for \ctwo{}.
 
 
 Applying the degree heuristic to maximize the total number of infected nodes is not as simple as in the single contagion case of DegreeDiscountIC since choosing the seed node with the highest expected total infection due to contagion interaction. Some possible ideas that I have to deal with this are below:
