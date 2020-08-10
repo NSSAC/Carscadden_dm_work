@@ -144,7 +144,7 @@ The multiple IC (Independent Cascade) model proposed is an extension of the mode
 
 The transitions are not as simple in multiple IC model. We will consider only the 2 contagion case.
 
-In the most general case, each node has a state array of length two where each entry is an integer 0-2. 0 represents susceptibility. 1 represents infection, and 2 represents recovery. For example, a node with state array, [0, 2] is susceptible to contagion 0 and recovered from contagion 2. Much like the original IC model, a node has time step to spread a contagion after which it will enter the recovered state. However, since there are two contagions, a node may become activated for one contagion after recovering from the other. Restrictions may be applied to the transitions in this model to account for cross-immunity; i.e., recovery from one contagion could prevent infection with the other. Here, however, we will consider the more general case. 
+In the most general case, each node has a state array of length two where each entry is an integer 0-2. 0 represents susceptibility. 1 represents infection, and 2 represents recovery. For example, a node with state array, [0, 2] is susceptible to contagion 0 and recovered from contagion 2. Much like the original IC model, a node has one time step to spread a contagion after which it will enter the recovered state. However, since there are two contagions, a node may become activated for one contagion after recovering from the other. Restrictions may be applied to the transitions in this model to account for cross-immunity; i.e., recovery from one contagion could prevent infection with the other. Here, however, we will consider the more general case. 
 
 \subsection{Contagion Interaction}
 
